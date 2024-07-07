@@ -1,0 +1,152 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant($background, $border, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%), $active-background: darken($background, 10%), $active-border: darken($border, 12.5%)) {
+  color: color-yiq($background);
+  @include gradient-bg($background);
+  border-color: $border;
+  @include box-shadow($btn-box-shadow);
+
+  @include hover {
+    color: color-yiq($hover-background);
+    @include gradient-bg($hover-background);
+    border-color: $hover-border;
+  }
+  
+
+  &:focus,
+  &.focus {
+    // Avoid using mixin so we can pass custom focus shadow properly
+    @if $enable-shadows {
+      box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+    } @else {
+      box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+    }
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    color: color-yiq($background);
+    background-color: $background;
+    border-color: $border;
+    // Remove CSS gradients if they're enabled
+    @if $enable-gradients {
+      background-image: none;
+    }
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: color-yiq($active-background);
+    background-color: $active-background;
+    @if $enable-gradients {
+      background-image: none; // Remove the gradient for the pressed/active state
+    }
+    border-color: $active-border;
+
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows and $btn-active-box-shadow != none {
+        box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+      }
+    }
+  }
+}
+
+@mixin button-outline-variant($color, $color-hover: color-yiq($color), $active-background: $color, $active-border: $color) {
+  color: $color;
+  border-color: $color;
+
+  @include hover {
+    color: $color-hover;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $color;
+    background-color: transparent;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: color-yiq($active-background);
+    background-color: $active-background;
+    border-color: $active-border;
+
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows and $btn-active-box-shadow != none {
+        box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .5);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+      }
+    }
+  }
+}
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  padding: $padding-y $padding-x;
+  @include font-size($font-size);
+  line-height: $line-height;
+  // Manually declare to provide an override to the browser default
+  @include border-radius($border-radius, 0);
+}
+
+// Button styles
+//
+// Generate the styles for all buttons: `button`, `.btn`, `.btn-link`, etc.
+//
+// $btn-padding-y          - The vertical padding for all `.btn` styles
+// $btn-padding-x          - The horizontal padding for all `.btn` styles
+// $btn-font-size          - The font size for all `.btn` styles
+// $btn-line-height        - The line height for all `.btn` styles
+// $btn-border-radius      - The border radius for all `.btn` styles
+// $btn-font-weight        - The font weight for all `.btn` styles
+// $btn-box-shadow         - The box shadow for all `.btn` styles
+// $btn-focus-width        - The width of the focus shadow for all `.btn` styles
+// $btn-active-box-shadow  - The box shadow for the active state of all `.btn` styles
+// $btn-transition         - The transition for all `.btn` styles
+// $btn-link-hover-color   - The hover color for `.btn-link` styles
+// $btn-link-hover-decoration - The hover decoration for `.btn-link` styles
+// $btn-padding-y-sm       - The vertical padding for `.btn-sm` styles
+// $btn-padding-x-sm       - The horizontal padding for `.btn-sm` styles
+// $btn-font-size-sm       - The font size for `.btn-sm` styles
+// $btn-line-height-sm     - The line height for `.btn-sm` styles
+// $btn-border-radius-sm   - The border radius for `.btn-sm` styles
+// $btn-padding-y-lg       - The vertical padding for `.btn-lg` styles
+// $btn-padding-x-lg       - The horizontal padding for `.btn-lg` styles
+// $btn-font-size-lg       - The font size for `.btn-lg` styles
+// $btn-line-height-lg     - The line height for `.btn-lg` styles
+// $btn-border-radius-lg   - The border radius for `.btn-lg` styles
+// $btn-block-spacing      - The margin bottom for `.btn-block` styles
+// $btn-primary-color      - The color for `.btn-primary` styles
+// $btn-primary-bg         - The background color for `.btn-primary` styles
+// $btn-secondary-color    - The color for `.btn-secondary` styles
+// $btn-secondary-bg       - The background color for `.btn-secondary` styles
+// $btn-info-color         - The color for `.btn-info` styles
+// $btn-info-bg            - The background color for `.btn-info` styles
+// $btn-success-color      - The color for `.btn-success` styles
+// $btn-success-bg         - The background color for `.btn-success` styles
+// $btn-warning-color      - The color for `.btn-warning` styles
+// $btn-warning-bg         - The background color for `.btn-warning` styles
+// $btn-danger-color       - The color for `.btn-danger` styles
+// $btn-danger-bg          - The background color for `.btn-danger` styles
+// $btn-light-color        - The color for `.btn-light` styles
+// $btn-light-bg           - The background color for `.btn-light` styles
+// $btn-dark-color         - The color for `.btn-dark` styles
+// $btn-dark-bg            - The background color for `.btn-dark` styles

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+    <!-- Title -->
+    <title>Only Freshers | Skill Test</title>
+
+    <!-- Meta Description for SEO -->
+    <meta name="description"
+        content="Only Freshers Skill Test - Evaluate and enhance your skills with our comprehensive tests designed for freshers. Join us and kickstart your career!">
+
+    <!-- Meta Keywords for SEO -->
+    <meta name="keywords" content="freshers, skill test, career, job skills, employment, assessment, Only Freshers">
+
+    <!-- Author Meta Tag -->
+    <meta name="author" content="Only Freshers Team">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Only Freshers | Skill Test">
+    <meta property="og:description"
+        content="Evaluate and enhance your skills with our comprehensive tests designed for freshers. Join us and kickstart your career!">
+    <meta property="og:image" content="image/og-image.jpg">
+    <meta property="og:url" content="https://www.onlyfreshers.com/skill-test">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Only Freshers | Skill Test">
+    <meta name="twitter:description"
+        content="Evaluate and enhance your skills with our comprehensive tests designed for freshers. Join us and kickstart your career!">
+    <meta name="twitter:image" content="image/twitter-image.jpg">
+
+    <!-- Viewport Settings -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+    body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('{% static "images/bgg.jpg" %}');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.quiz-container {
+    background: linear-gradient(to right, #f0f7ff, #c3d6ff);
+    /* Gradient background */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* Soft box shadow */
+    max-width: 600px;
+    width: 100%;
+    margin: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    /* Text shadow */
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form>* {
+    margin-bottom: 20px;
+}
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #555;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    border-bottom: 2px solid #6b9ce6; /* Adding a border under the label */
+    padding-bottom: 5px; /* Adding some space between label text and border */
+}
+/* Existing styles */
+
+/* Add these additional styles */
+
+/* Style the custom radio button */
+.radio-custom {
+    display: inline-block;
+    width: 22px; /* Adjust the size of the custom radio button */
+    height: 22px; /* Adjust the size of the custom radio button */
+    position: relative;
+    background-color: #fff;
+    border: 2px solid #6b9ce6; /* Border color for the custom radio button */
+    border-radius: 50%; /* Make the custom radio button circular */
+    margin-right: 10px; /* Add some space between the radio button and label */
+    -webkit-appearance: none; /* Remove default styles */
+    -moz-appearance: none; /* Remove default styles */
+    appearance: none; /* Remove default styles */
+}
+
+/* Style the checked state of the custom radio button */
+.radio-custom:checked::after {
+    content: "";
+    display: block;
+    width: 12px; /* Size of the checked indicator */
+    height: 12px; /* Size of the checked indicator */
+    border-radius: 50%; /* Make the checked indicator circular */
+    background-color: #6b9ce6; /* Color of the checked indicator */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style the label text associated with the radio button */
+.radio-label {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    color: #555;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Show the default radio button (hidden previously) */
+.radio-custom + input[type="radio"] {
+    display: none;
+}
+
+
+input[type="text"],
+input[type="email"],
+.form-control {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    /* Lighter background for inputs */
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+.form-control:focus {
+    border-color: #6b9ce6;
+    outline: none;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-group label {
+    font-weight: normal;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.messages {
+    margin-top: 20px;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.messages p {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    border-radius: 8px;
+    color: #3c763d;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.question-block {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.question-block h3 {
+    margin-top: 0;
+}
+
+.question-block p {
+    margin-bottom: 10px;
+}
+
+.question-category {
+    border: 2px solid #6b9ce6;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.option-box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option-box:hover {
+    background-color: #f0f0f0;
+}
+</style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h2>SKILL TEST</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

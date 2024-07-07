@@ -1,0 +1,117 @@
+{% extends "user/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Edu+TAS+Beginner:wght@400..700&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Edu+TAS+Beginner:wght@400..700&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Edu+TAS+Beginner:wght@400..700&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap');
+</style>
+<!-- NAVBAR -->
+<header class="site-navbar mt-3">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="site-logo col-6"><a href="{% url 'home' %}">Only Freshers</a></div>
+            <nav class="mx-auto site-navigation">
+                <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+                    <li><a href="{% url 'home' %}" class="nav-link active">Home</a></li>
+                    <!-- <li><a href="{% url 'contact' %}">Contact</a></li> -->
+                    <li class="d-lg-none"><a href="{% url 'login' %}"> Log In</a></li>
+                </ul>
+            </nav>
+            <div class="right-cta-menu text-right d-flex align-items-center col-6">
+                <div class="ml-auto">
+                    <a href="{% url 'login' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
+                            class="mr-2 icon-lock_outline"></span>Log In</a>
+                </div>
+                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
+                        class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- HOME -->
+<section class="home-section section-hero overlay bg-image" id="home-section">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="mb-5 text-center">
+                    <h1 class="text-white font-weight-bold" style="  font-family: Bebas Neue, sans-serif;
+                    ">Hire Top Talent and Help Students Find Jobs with Ease</h1>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <p style="color: #ffffff;"> <b style="  font-family: PT Serif, serif;">For Organizations</b></p>
+                        <p style="color: white; font-family: Quicksand, sans-serif;">Are you looking for skilled
+                            individuals? Sign Up and Post Jobs for free.</p>
+                        <a href="{% url 'company-register' %}" class="btn btn-primary btn-lg btn-block text-white"
+                            style="background-color: #f43a5c; border-color: #f43a5c;"><i
+                                class="fa-solid fa-key"> </i > Sign Up | <i class="fa-solid fa-signs-post"></i> Post Job</a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <p style="color: #ffffff;;"> <b style="  font-family: PT Serif, serif;">For Applicants</b></p>
+                        <p style="color: white;   font-family: Quicksand, sans-serif;
+                        ">Looking for a suitable job? Sign up and match your choice with requirements.</p>
+                        <a href="{% url 'applicant-register' %}"
+                            class="btn btn-primary btn-lg btn-block text-white btn-search "
+                            style="background-color: #f43a5c; border-color: #f43a5c;"> <i class="fa-solid fa-user-tie"></i> Sign Up | <span
+                            class="icon-search icon mr-2"
+                            style="background-color: #f43a5c; border-color: #f43a5c;"></span> Find Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#next" class="scroll-button smoothscroll">
+        <span class=" icon-keyboard_arrow_down"></span>
+    </a>
+</section>
+
+<section class="py-5 bg-image overlay-primary fixed overlay" id="next">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2 text-white">JobBoard Site Stats</h2>
+            </div>
+        </div>
+        <div class="row pb-0 block__19738 section-counter justify-content-center">
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="{{applicants_len}}">0</strong>
+                </div>
+                <span class="caption">Candidates</span>
+            </div>
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="{{jobs_len}}">0</strong>
+                </div>
+                <span class="caption">Jobs Posted</span>
+            </div>
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="{{filled_job_len}}">0</strong>
+                </div>
+                <span class="caption">Jobs Filled</span>
+            </div>
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="{{companies_len}}">0</strong>
+                </div>
+                <span class="caption">Companies</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
